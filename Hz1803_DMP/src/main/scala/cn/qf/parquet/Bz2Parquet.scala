@@ -23,7 +23,7 @@ object Bz2Parquet {
     //读取数据
     val lines = sc.textFile(inputPath)
     //进行数据过滤，保证字段大于85个，如果数据内部有多个连续一样的，有些无法解析
-    val rowRDD = lines.map(t=>t.split(",",t.length)).filter(_.length >= 85).map(arr=>{
+    val rowRDD = lines.map(t=>t.split(",",-1)).filter(_.length >= 85).map(arr=>{
       Row(
         arr(0),
         DFUtils.toInt(arr(1)),
